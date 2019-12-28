@@ -19,8 +19,7 @@ A computer Game called 2048 developed with C++
 1. Define a box as a class.
 
 the interface is a 4*4 vector, and there are 16 boxes in this vector.
-
-The private values in the class are the attributes of the box, including 4 private values of ‘up‘, ’down‘, ‘left’, and ‘right’, which indicate the position of the box, ‘num’ represents the number in the box, and 'addFlag' indicates whether it can be added when two boxed collided. When addFlag is 1, the collided numbers could be added. When addFlag is 0, the two numbers couldn't be added although the boxes are collided.
+The private values in the class are the attributes of the box, including 4 private values of ‘up‘, ’down‘, ‘left’, and    ‘right’, which indicate the position of the box, ‘num’ represents the number in the box, and 'addFlag' indicates whether it can be added when two boxed collided. When addFlag is 1, the collided numbers could be added. When addFlag is 0, the two numbers couldn't be added although the boxes are collided.
 
 2. Initialization of number setting:
 
