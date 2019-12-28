@@ -3,7 +3,7 @@ A computer Game called 2048 developed with C++.
 
 Click the 2048.cpp to see the major codes.
 
-Downloaded the 2048.project.zip and unzip it, run 2048.sln in your visual C++ 2017(EasyX installed) to show.
+Download the 2048.project.zip and unzip it, run 2048.sln in your visual C++ 2017(EasyX installed) to show.
 # Game Interaface
 
 ![Alt text](images/1.png)
