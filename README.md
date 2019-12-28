@@ -32,7 +32,7 @@ Randomize a box and set it to 2. If there has been a number in this box, re-rand
 5. Development the game interface with C++ external visualization tool EasyX.
 
 # Core algorithm and code
-![Alt text](images/over.png)
+![Alt text](images/code.png)
 
 Calculate how the boxes moved(move up in this example)
 
