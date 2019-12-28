@@ -1,5 +1,4 @@
-// 2048.cpp : 定义控制台应用程序的入口点。
-
+// 2048.cpp : Defines the entry point for the console application.
 #include "stdafx.h"
 #include<graphics.h>
 #include<conio.h>
@@ -33,7 +32,7 @@ public:
 			fillrectangle(left, top, right, bottom);
 		}
 	}
-	//画方块
+	//Draw the squire box
 
 	void drawNum() {
 		if (num != 0) {
@@ -42,7 +41,7 @@ public:
 			drawtext(Snum, &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		}
 	}
-	//输出数字
+	//draw the number
 	
 	void drawText(TCHAR c) {
 		RECT r = { left, top, right, bottom };
@@ -79,15 +78,15 @@ public:
 				moveFlag++;
 			}
 			else if (s->num == num && addFlag == 0 && s->addFlag == 0) {
-				s->setNum(2 * num); //能加，数字c*2
-				s->setaddFlag(1); //置不可加
-				score += 2 * num; //分数是合的数是几，加几
+				s->setNum(2 * num); //if the nums could be added, then num*2
+				s->setaddFlag(1); //set unaddable
+				score += 2 * num; //rule
 				num = 0;
 				moveFlag++;
 			}
 		}
 	}
-	//移动
+	//move the squires
 
 	int Test(Square* s) {
 		if (s->num == num) {
@@ -111,7 +110,7 @@ inline void drawInterface() {
 		squareV.at(i).drawNum();
 	}
 }
-//绘制界面
+//draw the interface
 
 inline void drawTitle() {
 	RECT r1 = { 18,8,226,142 };
@@ -141,7 +140,7 @@ inline void drawTitle() {
 	settextstyle(&f3);
 	drawtext(_T("BEST\nSCORE"), &r3, DT_CENTER | DT_VCENTER);
 }
-//绘制标题
+//draw the title
 
 inline void drawScore() {
 	RECT r4 = { 224,75,324,138 };
@@ -171,7 +170,7 @@ inline void drawScore() {
 	_itow(bestscore, cache, 10);
 	drawtext(cache, &r5, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 }
-//绘制分数
+//draw the score
 
 int getBestscore() {
 	char cache[100] = {};
@@ -204,7 +203,7 @@ void setBestscore() {
 	fclose(fp);
 }
 
-BOOL WINAPI ConsoleHandler(DWORD Cevent) {		//ConsoleHandler函数用法详见msdn:
+BOOL WINAPI ConsoleHandler(DWORD Cevent) {		//ConsoleHandler function:
 	if (Cevent == CTRL_CLOSE_EVENT) {			//https://msdn.microsoft.com/en-us/library/windows/desktop/ms686016(v=vs.85).aspx
 		setBestscore();
 		return TRUE;
@@ -223,12 +222,12 @@ int main()
 	cleardevice();
 	drawTitle();
 	LOGFONT f;
-	gettextstyle(&f);                     // 获取当前字体设置
-	f.lfHeight = 48;                      // 设置字体高度为 48
-	_tcscpy_s(f.lfFaceName, _T("Consolas"));    // 设置字体
-	f.lfQuality = ANTIALIASED_QUALITY;    // 设置输出效果为抗锯齿  
-	settextstyle(&f);                     // 设置字体样式
-	//画布设定，字体设定 ↑
+	gettextstyle(&f);                     // Get the current font settings
+	f.lfHeight = 48;                      // Set font height to 48
+	_tcscpy_s(f.lfFaceName, _T("Consolas"));    // set font
+	f.lfQuality = ANTIALIASED_QUALITY;    // Set the output effect to anti-aliasing
+	settextstyle(&f);                     // Set font style
+	//Canvas settings, font settings↑
 	
 	int i, j;
 	for (i = 0; i < 4; i++) {
@@ -237,16 +236,16 @@ int main()
 			squareV.push_back(newSquare);
 		}
 	}
-	// 将16个Square类对象存入vector中 ↑
+	// Store 16 Square objects in vector
 
 Start:
 	while (kbhit()) {
 		_getch();
-	}										//重要！！清除sleep期间_getch()读入的字符
+	}										//important! !! Clear characters read by _getch () during sleep
 	srand((unsigned int)time(NULL));
 	squareV.at(rand() % 16).inisetNum();
 	while (squareV.at(rand() % 16 + 1).inisetNum()) {}
-	// 生成初始随机两个位置 ↑
+	// Generate initial random two positions
 
 	drawInterface();
 
@@ -254,15 +253,15 @@ Start:
 	score = 0;
 	bestscore = getBestscore();
 	drawScore();
-	if (SetConsoleCtrlHandler((PHANDLER_ROUTINE)ConsoleHandler, TRUE)) {		//SetConsoleCtrlHandler函数用法详见msdn:
+	if (SetConsoleCtrlHandler((PHANDLER_ROUTINE)ConsoleHandler, TRUE)) {		//SetConsoleCtrlHandler function usage details see msdn:
 		while (TRUE) {															//https://msdn.microsoft.com/en-us/library/windows/desktop/ms686016(v=vs.85).aspx
 			char get = _getch();
 			if (get == 'q' || get == 'Q' || get == 27) {
-				if (MessageBox(hwnd, TEXT("您确定要退出吗？"), TEXT("2048"), MB_YESNO) == IDYES) {
+				if (MessageBox(hwnd, TEXT("Are you sure to quit?"), TEXT("2048"), MB_YESNO) == IDYES) {
 					goto End;
 				}
 			}
-			//退出
+			//exir
 			if (get == 72 || get == 'w') {
 				for (int i = 4; i < 8; i++) {
 					squareV.at(i).moveSquare(&(squareV.at(i - 4)));
@@ -283,8 +282,7 @@ Start:
 					squareV.at(i).moveSquare(&(squareV.at(i - 4)));
 				}
 				for (i = 0; i < 16; i++) {
-					squareV.at(i).setaddFlag(0); //如果格子已经加过一次，不能再加第二次，每次操作完后变可加状态44空空不可加，置0变可加，再按一次，应
-				}
+					squareV.at(i).setaddFlag(0); //If the grid has been added once, it cannot be added a second time. Set to 0 to make it addable.				}
 				drawInterface();
 				if (moveFlag != 0) {
 					srand((unsigned int)time(NULL));
@@ -294,7 +292,7 @@ Start:
 				}
 				drawInterface();
 			}
-			//上移
+			//Move up
 			else if (get == 80 || get == 's') {
 				for (int i = 11; i > 7; i--) {
 					squareV.at(i).moveSquare(&(squareV.at(i + 4)));
@@ -326,7 +324,7 @@ Start:
 				}
 				drawInterface();
 			}
-			//下移
+			//Move down
 			else if (get == 75 || get == 'a') {
 				for (int i = 4; i < 8; i++) {
 					squareV.at(turnedSequence[i]).moveSquare(&(squareV.at(turnedSequence[i] - 1)));
@@ -358,7 +356,7 @@ Start:
 				}
 				drawInterface();
 			}
-			//左移
+			//move left
 			else if (get == 77 || get == 'd') {
 				for (int i = 11; i > 7; i--) {
 					squareV.at(turnedSequence[i]).moveSquare(&(squareV.at(turnedSequence[i] + 1)));
@@ -390,7 +388,7 @@ Start:
 				}
 				drawInterface();
 			}
-			//右移
+			//move right
 			if (score > bestscore) {
 				bestscore = score;
 			}
@@ -400,7 +398,7 @@ Start:
 			int endFlagUp = 0, endFlagLeft = 0;
 			while (squareV.at(i).getNum()) {
 				i++;
-				if (i == 16) {//挨着的，重复的数，（可上下左右操作）格子满了可及继续
+				if (i == 16) {
 					int j = 4;
 					while (squareV.at(j).Test(&(squareV.at(j - 4)))) {
 						j++;
@@ -423,9 +421,9 @@ Start:
 			if (endFlagUp == 1 && endFlagLeft == 1) {
 				break;
 			}
-			//判断是否无法继续游戏
+			//Determine if you cannot continue the game
 		}
-		//主要操作部分
+		//Main operation part
 
 		for (i = 0; i < 16; i++) {
 			squareV.at(i).setNum(0);
@@ -438,12 +436,12 @@ Start:
 		}
 		setBestscore();
 		Sleep(3000);
-		//输出GAME OVER
+		//output GAME OVER
 
-		if (MessageBox(hwnd, TEXT("是否继续游戏？"), TEXT("2048"), MB_YESNO) == IDYES) {
+		if (MessageBox(hwnd, TEXT("Whether to continue the game？"), TEXT("2048"), MB_YESNO) == IDYES) {
 			goto Start;
 		}
-		//继续游戏弹窗
+		//the message box of "continue game"
 	}
 	else {
 		MessageBox(hwnd, TEXT("ERROR:could not set control handler."), TEXT("2048"), MB_OK);
