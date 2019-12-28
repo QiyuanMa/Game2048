@@ -1,5 +1,9 @@
 # Game2048
-A computer Game called 2048 developed with C++
+A computer Game called 2048 developed with C++.
+
+Click the 2048.cpp to see the major codes.
+
+Downloaded the 2048.project.zip and unzip it, run 2048.sln in your visual C++ 2017(EasyX installed) to show.
 # Game Interaface
 
 ![Alt text](images/1.png)
@@ -45,10 +49,4 @@ Starting from the second line, check whether the second line can be moved to the
 Move the third line to the second line, and then move the second line to the first line.
 
 4. The fourth, fifth, and sixth 'for' loop (fourth line -> first line)
-Move the fourth line to the third line, and then move the third line to the second line, and finally move the second line to the first line
-
-5. The final 'for' loop:
-If the grid has been added once, it cannot be added a second time, set addFlag = 0 to make it addable after each operation。
-（For example, the 4 number in 4 lines and the same column are '2' '2' '2' '2', after one operation it should be '4','4','0','0', at this time addFlag == 1 to prevent double merging in one operation'8','0','0','0'. And then, before the second operation, we should set addFlag = 0 in order to change '4','4','0','0' into '8','I 0','0','0' after the second operation.）
-
-6. Update the visualization interface. (update the vector)
+Move the fourth line to the third line, and then move the third line to the second line, and fin
